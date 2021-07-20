@@ -30,6 +30,9 @@ install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
 sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
 
+echo "Adding PHP Repository..."
+add-apt-repository ppa:ondrej/php
+
 echo "Downloading Discord package..."
 wget -O ~/discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
 
@@ -47,7 +50,7 @@ mkdir /usr/share/fonts/truetype/$FONT_NAME
 
 echo "Installing packages..."
 apt update
-apt install brave-browser filezilla unzip openjdk-11-jre guake git git-gui gitk code nodejs gdebi-core npm fonts-inconsolata fonts-roboto zsh vim -y
+apt install brave-browser filezilla unzip openjdk-11-jre guake git git-gui gitk code nodejs gdebi-core npm fonts-inconsolata fonts-roboto zsh vim spotify-client qemu-kvm git-flow software-properties-common php8.0 libapache2-mod-php8.0 php8.0-fpm libapache2-mod-fcgid php8.0-mysql php8.0-gd php-xml openssl php-common php-curl php-json php-mbstring php-mysql php-xml php-zip gnome-keyring -y
 
 echo "Installing NPM global packages..."
 npm install -g n yarn
@@ -82,6 +85,12 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 echo "Updating font cache..."
 fc-cache -fv
+
+
+echo "Enable PHP-FPM..."
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php8.0-fpm
+
 
 read -p "Set Papirus as Icon Theme. Press any key to continue..."
 read -p "Set Breeze Snow as Cursor Theme. Press any key to continue..."
