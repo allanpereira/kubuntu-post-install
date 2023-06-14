@@ -66,3 +66,8 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 - Add widgets
   - Color Picker
   - Weather Report
+- Set git user config:
+```
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
