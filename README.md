@@ -53,5 +53,16 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 
 
 ## Post-install actions
-- Set the icon of Application Launcher (it was downloaded to `~/Pictures`)
+- Set the Global Theme (Global Theme > "Breeze")
+- Set the Plasma Style (Plasma Style > "Breeze Dark")
+- Set the Color Scheme (Colors > "Breeze Classic")
 - Set the Cursor Theme (Cursors > Breeze Light - 48)
+- Set the Icon Theme (Icons > Papirus-Light)
+- Set the icon of Application Launcher (it was downloaded to `~/Pictures`)
+- Replace "Peek at Desktop" widget by "Minimize All Windows"
+- Configure System Tray entries (System Tray Settings > Entries)
+- Configure Clock (Digital Clock Settings > Appearance)
+  - Date Format: ISO Date
+- Add widgets
+  - Color Picker
+  - Weather Report
