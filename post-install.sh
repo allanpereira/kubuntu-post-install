@@ -67,10 +67,14 @@ rm -rf ${FONT_NAME}.tar.gz ${FONT_NAME}
 mv source-code-pro* ${FONT_NAME}
 
 print "Downloading WebStorm..."
-wget -q --show-progress "https://download.jetbrains.com/webstorm/WebStorm-2023.1.tar.gz" -O "webstorm.tar.gz"
-tar --extract --gzip --file webstorm.tar.gz
-rm -rf webstorm.tar.gz
-mv WebStorm-* webstorm
+if [ -z "$(ls -A $HOME/programs/webstorm)" ]; then
+  wget -q --show-progress "https://download.jetbrains.com/webstorm/WebStorm-2023.1.tar.gz" -O "webstorm.tar.gz"
+  tar --extract --gzip --file webstorm.tar.gz
+  rm -rf webstorm.tar.gz
+  mv WebStorm-* webstorm
+else
+  echo -e "Already installed, skipping."
+fi
 
 
 print "Installing APT packages..."
@@ -105,10 +109,12 @@ makedir /usr/share/fonts/truetype/$FONT_NAME
 cp -R /tmp/$FONT_NAME/* /usr/share/fonts/truetype/$FONT_NAME/
 rm -rf /tmp/$FONT_NAME
 
-print "Installing WebStorm..."
-makedir $HOME/programs/webstorm/
-cp -R /tmp/webstorm/* $HOME/programs/webstorm/
-rm -rf /tmp/webstorm
+if [ -z "$(ls -A $HOME/programs/webstorm)" ]; then
+  print "Installing WebStorm..."
+  makedir $HOME/programs/webstorm/
+  cp -R /tmp/webstorm/* $HOME/programs/webstorm/
+  rm -rf /tmp/webstorm
+fi
 
 print "Installing Oh My Zsh..."
 rm -rf $HOME/.oh-my-zsh
