@@ -126,6 +126,9 @@ git config --global alias.dlog "log --all --decorate --oneline --graph"
 print "Changing Git default text editor..."
 git config --global core.editor "vim"
 
+print "Changing Git default branch name..."
+git config --global init.defaultBranch main
+
 print "Setting ZSH as default shell..."
 chsh -s $(which zsh)
 
