@@ -116,6 +116,9 @@ if [ -z "$(ls -A $HOME/programs/webstorm)" ]; then
   rm -rf /tmp/webstorm
 fi
 
+print "Installing Node 18..."
+n 18.16.0
+
 print "Installing Oh My Zsh..."
 rm -rf $HOME/.oh-my-zsh
 yes | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -128,6 +131,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/k
 echo "source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
+
 
 print "Registering Git Aliases..."
 git config --global alias.co checkout
