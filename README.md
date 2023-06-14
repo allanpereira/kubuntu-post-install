@@ -16,7 +16,7 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 
 ### Development Stacks
 - [NodeJS (12.x.x)](https://nodejs.org/) - An open-source, cross-platform JavaScript runtime environment.
-- [Elixir (1.8.x)](https://elixir-lang.org/https://elixir-lang.org/) - Dynamic, functional language for building scalable and maintainable applications.
+- [Elixir (1.8.x)](https://elixir-lang.org/) - Dynamic, functional language for building scalable and maintainable applications.
 - [Java (17)](https://www.java.com/) - Programming language and computing platform.
 - [PHP (8.2.x)](https://www.php.net/) - A popular general-purpose scripting language that is especially suited to web development.
 
