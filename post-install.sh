@@ -148,5 +148,13 @@ wget -q --show-progress -O $HOME/Pictures/ic_dashboard_white_48dp.png $REPO/asse
 print "Setting zsh theme..."
 sed -i "s|ZSH_THEME=.*|ZSH_THEME=\"$ZSH_THEME\"|" $HOME/.zshrc
 
+print "Writing environment variables export..."
+touch $HOME/.bash_profile
+touch $HOME/.zshenv
+echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export ANDROID_HOME=$HOME/android/sdk
+export ANDROID_SDK_ROOT=$HOME/android/sdk
+export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"' | tee $HOME/.bash_profile > $HOME/.zshenv
+
 print "Updating font cache..."
 fc-cache -f
