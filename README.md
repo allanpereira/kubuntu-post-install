@@ -32,6 +32,7 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 
 ### CLI Tools
 - [jq](https://github.com/jqlang/jq/) - Command-line JSON processor
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k/) - Theme for Zsh which emphasizes speed, flexibility and out-of-the-box experience.
 
 ### Drivers
 - [DisplayLink USB TO DVI Driver](https://www.synaptics.com/products/displaylink-graphics/) - The driver of DisplayLink USB to DVI connector.
