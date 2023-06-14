@@ -121,5 +121,9 @@ update-alternatives --set x-www-browser /usr/bin/brave-browser-stable
 print "Registering system aliases..."
 wget -O $HOME/.aliases $REPO/.aliases
 
+print "Downloading application launcher icon..."
+mkdir -p $HOME/Pictures
+wget -q --show-progress -O $HOME/Pictures/ic_dashboard_white_48dp.png $REPO/assets/ic_dashboard_white_48dp.png
+
 print "Updating font cache..."
 fc-cache -f
