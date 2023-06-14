@@ -154,6 +154,9 @@ wget -q --show-progress -O $HOME/Pictures/ic_dashboard_white_48dp.png $REPO/asse
 print "Setting zsh theme..."
 sed -i "s|ZSH_THEME=.*|ZSH_THEME=\"$ZSH_THEME\"|" $HOME/.zshrc
 
+print "Setting zsh plugins..."
+sed -i "s|plugins=.*|plugins=(colorize docker git jsontools kubectl)|" $HOME/.zshrc
+
 print "Writing environment variables export..."
 touch $HOME/.bash_profile
 touch $HOME/.zshenv
