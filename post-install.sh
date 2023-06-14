@@ -123,6 +123,11 @@ yes | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/in
 print "Installing Powerlevel10k theme for Zsh..."
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
+print "Installing Zsh plugins..."
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/k
+echo "source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
 
 print "Registering Git Aliases..."
 git config --global alias.co checkout
@@ -155,7 +160,7 @@ print "Setting zsh theme..."
 sed -i "s|ZSH_THEME=.*|ZSH_THEME=\"$ZSH_THEME\"|" $HOME/.zshrc
 
 print "Setting zsh plugins..."
-sed -i "s|plugins=.*|plugins=(colorize docker git jsontools kubectl)|" $HOME/.zshrc
+sed -i "s|plugins=.*|plugins=(colorize docker git jsontools kubectl k zsh-autosuggestions zsh-syntax-highlighting)|" $HOME/.zshrc
 
 print "Writing environment variables export..."
 touch $HOME/.bash_profile
