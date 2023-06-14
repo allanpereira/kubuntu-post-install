@@ -52,6 +52,9 @@ sh -c 'echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packag
 # PHP
 add-apt-repository -y ppa:ondrej/php > /dev/null 2>&1
 
+# Papirus Icon Theme
+add-apt-repository -y ppa:papirus/papirus > /dev/null 2>&1
+
 
 print "Downloading DisplayLink USB TO DVI Driver..."
 wget -q --show-progress https://www.synaptics.com/sites/default/files/exe_files/2022-08/DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu5.6.1-EXE.zip
@@ -80,12 +83,12 @@ apt install -y \
     code vim \
     google-cloud-cli kubectl \
     fonts-inconsolata fonts-roboto \
+    papirus-icon-theme \
     brave-browser filezilla \
     guake gdebi-core gnome-keyring jq qemu-kvm unzip zsh
 
 print "Installing Snap packages..."
 snap install discord
-snap install icon-theme-papirus
 snap install spotify
 
 print "Installing NPM global packages..."
