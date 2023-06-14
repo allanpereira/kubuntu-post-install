@@ -9,7 +9,12 @@ REPO="https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/main"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 function print {
-    echo -e "\n\033[1m$1\033[0m"
+  echo -e "\n\033[1m$1\033[0m"
+}
+
+function makedir {
+  mkdir -p $1
+  chown -R $USER:$USER $1
 }
 
 if [ "$EUID" -ne 0 ]
@@ -20,8 +25,8 @@ fi
 
 print "Creating directories..."
 cd $HOME
-mkdir -p programs
-mkdir -p repos
+makedir programs
+makedir repos
 cd /tmp
 
 
@@ -93,12 +98,12 @@ chmod +x displaylink-driver-5.6.1-59.184.run
 ./displaylink-driver-5.6.1-59.184.run
 
 print "Installing Source Code Pro Font..."
-mkdir -p /usr/share/fonts/truetype/$FONT_NAME
+makedir /usr/share/fonts/truetype/$FONT_NAME
 cp -R /tmp/$FONT_NAME/* /usr/share/fonts/truetype/$FONT_NAME/
 rm -rf /tmp/$FONT_NAME
 
 print "Installing WebStorm..."
-mkdir -p $HOME/programs/webstorm/
+makedir $HOME/programs/webstorm/
 cp -R /tmp/webstorm/* $HOME/programs/webstorm/
 rm -rf /tmp/webstorm
 
@@ -131,7 +136,7 @@ print "Registering system aliases..."
 wget -O $HOME/.aliases $REPO/.aliases
 
 print "Downloading application launcher icon..."
-mkdir -p $HOME/Pictures
+makedir $HOME/Pictures
 wget -q --show-progress -O $HOME/Pictures/ic_dashboard_white_48dp.png $REPO/assets/ic_dashboard_white_48dp.png
 
 print "Updating font cache..."
