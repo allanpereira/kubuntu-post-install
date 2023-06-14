@@ -39,6 +39,10 @@ install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packa
 sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
 
+# gcloud CLI
+curl -fsSLo /usr/share/keyrings/cloud.google.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+sh -c 'echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" > /etc/apt/sources.list.d/google-cloud-sdk.list'
+
 # PHP
 add-apt-repository -y ppa:ondrej/php > /dev/null 2>&1
 
@@ -68,6 +72,7 @@ apt install -y \
     npm nodejs \
     git git-gui gitk git-flow \
     code vim \
+    google-cloud-cli kubectl \
     fonts-inconsolata fonts-roboto \
     brave-browser filezilla \
     guake gdebi-core gnome-keyring jq qemu-kvm unzip zsh
