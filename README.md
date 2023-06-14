@@ -49,3 +49,8 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 - [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) - Monospaced font family for user interface and coding environments.
 - [Inconsolata](https://github.com/googlefonts/Inconsolata) - Monospace font, designed for printed code listings and the like.
 - [Roboto](https://github.com/googlefonts/roboto) - Google’s signature family of fonts, the default font on Android and Chrome OS, and the recommended font for Material Design.
+
+
+## Post-install actions
+- Set the icon of Application Launcher (it was downloaded to `~/Pictures`)
+- Set the Cursor Theme (Cursors > Breeze Light - 48)
