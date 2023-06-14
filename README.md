@@ -28,6 +28,7 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 - [Filezilla](https://filezilla-project.org/) - Open source FTP client.
 - [Guake](http://guake-project.org/) - A top-down terminal for Gnome, and is highly inspirated by the famous terminal used in Quake.
 - [Zsh](https://ohmyz.sh/) - An open source and community-driven framework for managing your Zsh configuration.
+- [Google Cloud CLI](https://cloud.google.com/sdk/gcloud) - Set of tools to create and manage Google Cloud resources.
 
 ### CLI Tools
 - [jq](https://github.com/jqlang/jq/) - Command-line JSON processor
