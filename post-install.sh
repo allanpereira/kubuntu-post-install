@@ -6,6 +6,7 @@ USER=$(getent passwd $SUDO_USER | cut -d: -f1)
 HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 
 REPO="https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/main"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 function print {
     echo -e "\n\033[1m$1\033[0m"
@@ -104,6 +105,9 @@ rm -rf /tmp/webstorm
 print "Installing Oh My Zsh..."
 rm -rf $HOME/.oh-my-zsh
 yes | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+print "Installing Powerlevel10k theme for Zsh..."
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 
 print "Registering Git Aliases..."
