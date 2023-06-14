@@ -5,6 +5,8 @@ set -e
 USER=$(getent passwd $SUDO_USER | cut -d: -f1)
 HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 
+REPO="https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/main"
+
 function print {
     echo -e "\n\033[1m$1\033[0m"
 }
@@ -115,6 +117,9 @@ chsh -s $(which zsh)
 
 print "Setting Brave as default browser..."
 update-alternatives --set x-www-browser /usr/bin/brave-browser-stable
+
+print "Registering system aliases..."
+wget -O $HOME/.aliases $REPO/.aliases
 
 print "Updating font cache..."
 fc-cache -f

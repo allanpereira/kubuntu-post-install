@@ -1,0 +1,9 @@
+alias g=git
+alias k=kubectl
+alias c=clear
+alias cls=clear
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias gk='gitk --all &'
+alias up='git pull origin $(git rev-parse --abbrev-ref HEAD)'
