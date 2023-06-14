@@ -139,5 +139,8 @@ print "Downloading application launcher icon..."
 makedir $HOME/Pictures
 wget -q --show-progress -O $HOME/Pictures/ic_dashboard_white_48dp.png $REPO/assets/ic_dashboard_white_48dp.png
 
+print "Setting zsh theme..."
+sed -i "s|ZSH_THEME=.*|ZSH_THEME=\"$ZSH_THEME\"|" $HOME/.zshrc
+
 print "Updating font cache..."
 fc-cache -f
