@@ -158,7 +158,7 @@ wget -O $HOME/.aliases $REPO/.aliases
 
 print "Downloading application launcher icon..."
 makedir $HOME/Pictures
-wget -q --show-progress -O $HOME/Pictures/ic_dashboard_white_48dp.png $REPO/assets/ic_dashboard_white_48dp.png
+wget -q --show-progress -O $HOME/Pictures/ic_dashboard_white_48dp.png $REPO/assets/images/ic_dashboard_white_48dp.png
 
 print "Setting zsh theme..."
 sed -i "s|ZSH_THEME=.*|ZSH_THEME=\"$ZSH_THEME\"|" $HOME/.zshrc
@@ -173,6 +173,12 @@ echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export ANDROID_HOME=$HOME/android/sdk
 export ANDROID_SDK_ROOT=$HOME/android/sdk
 export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"' | tee $HOME/.bash_profile > $HOME/.zshenv
+
+print "Creating desktop entries..."
+for file in assets/desktop-entries/*.desktop
+do
+    envsubst < "$file" > $HOME/Desktop/$(basename $file)
+done
 
 print "Updating font cache..."
 fc-cache -f
