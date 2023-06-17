@@ -85,11 +85,11 @@ apt install -y \
     npm nodejs \
     git git-gui gitk git-flow \
     code vim \
-    google-cloud-cli kubectl \
+    google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin kubectl \
     fonts-inconsolata fonts-roboto \
     papirus-icon-theme \
     brave-browser filezilla \
-    guake gdebi-core gnome-keyring jq qemu-kvm unzip zsh
+    guake gdebi-core gnome-keyring kolourpaint jq qemu-kvm unzip xclip zsh
 
 print "Installing Snap packages..."
 snap install discord
