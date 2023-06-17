@@ -151,7 +151,7 @@ print "Changing Git autoSetupRemote config..."
 git config --global push.autoSetupRemote true
 
 print "Setting ZSH as default shell..."
-chsh -s $(which zsh)
+chsh -s "$(which zsh)"
 
 print "Setting Brave as default browser..."
 update-alternatives --set x-www-browser /usr/bin/brave-browser-stable
@@ -180,7 +180,7 @@ export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:
 print "Creating desktop entries..."
 for file in assets/desktop-entries/*.desktop
 do
-    envsubst < "$file" > $HOME/Desktop/$(basename $file)
+    envsubst < "$file" > "$HOME/Desktop/$(basename $file)"
 done
 
 print "Updating font cache..."

@@ -71,3 +71,18 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
+- Disable unused WebStorm plugins to improve performance (File > Settings... > Plugins > Installed)
+- Install WebStorm plugins (File > Settings... > Plugins > Marketplace)
+  - .env files support
+  - .ignore
+  - Bash Support
+  - CSV Editor
+  - Docker
+  - GitToolBox
+  - GraphQL
+  - Kubernetes
+  - Markdown
+  - Material Theme UI
+  - Node.js
+  - OpenAPI Specifications
+  - String Manipulation
