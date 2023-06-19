@@ -151,6 +151,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-$HO
 git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/k
 echo "source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
 
+print "Installing Linux Brew..."
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 print "Registering Git Aliases..."
 git config --global alias.co checkout
@@ -198,11 +200,17 @@ export ANDROID_HOME=$HOME/android/sdk
 export ANDROID_SDK_ROOT=$HOME/android/sdk
 export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"' | tee $HOME/.bash_profile > $HOME/.zshenv
 
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.bash_profile
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.zshenv
+
 print "Creating desktop entries..."
 for file in assets/desktop-entries/*.desktop
 do
     envsubst < "$file" > "$HOME/Desktop/$(basename $file)"
 done
+
+print "Installing Brew packages..."
+brew install derailed/k9s/k9s
 
 print "Updating font cache..."
 fc-cache -f
