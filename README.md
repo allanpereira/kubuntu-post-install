@@ -91,3 +91,4 @@ git config --global user.name "Your Name"
   - Node.js
   - OpenAPI Specifications
   - String Manipulation
+- Set zsh as WebStorm terminal (File > Settings... > Tools > Terminal > Application Settings > Shell path)
