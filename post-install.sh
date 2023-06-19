@@ -55,6 +55,10 @@ curl -fsSLo /usr/share/keyrings/cloud.google.gpg https://packages.cloud.google.c
 sh -c 'echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" > /etc/apt/sources.list.d/google-cloud-sdk.list'
 wget -qO- https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor > /usr/share/keyrings/cloud.google.gpg
 
+# Lens
+curl -fsSL https://downloads.k8slens.dev/keys/gpg | gpg --dearmor | tee /usr/share/keyrings/lens-archive-keyring.gpg > /dev/null
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/lens-archive-keyring.gpg] https://downloads.k8slens.dev/apt/debian stable main" | tee /etc/apt/sources.list.d/lens.list > /dev/null
+
 # PHP
 add-apt-repository -y ppa:ondrej/php > /dev/null 2>&1
 
@@ -95,7 +99,7 @@ apt install -y \
     npm nodejs \
     git git-gui gitk git-flow \
     code vim \
-    google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin kubectl \
+    google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin kubectl lens \
     fonts-inconsolata fonts-roboto \
     papirus-icon-theme \
     brave-browser filezilla \
@@ -104,6 +108,7 @@ apt install -y \
 print "Installing Snap packages..."
 snap install discord
 snap install spotify
+snap install kontena-lens --classic
 
 print "Installing NPM global packages..."
 npm install -g n yarn pnpm
