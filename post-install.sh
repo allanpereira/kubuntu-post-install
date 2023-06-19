@@ -166,8 +166,8 @@ git config --global core.editor "vim"
 print "Changing Git default branch name..."
 git config --global init.defaultBranch main
 
-print "Changing Git autoSetupRemote config..."
-git config --global push.autoSetupRemote true
+print "Changing Git push config..."
+git config --global push.default current
 
 print "Setting ZSH as default shell..."
 chsh -s "$(which zsh)"
