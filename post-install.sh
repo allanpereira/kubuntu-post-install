@@ -158,6 +158,7 @@ git config --global push.autoSetupRemote true
 
 print "Setting ZSH as default shell..."
 chsh -s "$(which zsh)"
+usermod -s "$(which zsh)" $USER
 
 print "Setting Brave as default browser..."
 update-alternatives --set x-www-browser /usr/bin/brave-browser-stable
