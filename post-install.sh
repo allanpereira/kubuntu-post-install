@@ -91,6 +91,21 @@ else
   echo -e "Already installed, skipping."
 fi
 
+print "Downloading IntelliJ IDEA..."
+if [ -z "$(ls -A $HOME/programs/intellij)" ]; then
+  wget -q --show-progress "https://download.jetbrains.com/idea/ideaIU-2023.1.2.tar.gz" -O "intellij.tar.gz"
+  tar --extract --gzip --file intellij.tar.gz
+  rm -rf intellij.tar.gz
+  mv idea* intellij
+else
+  echo -e "Already installed, skipping."
+fi
+
+print "Downloading k9s..."
+wget -q --show-progress "https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz" -O "k9s.tar.gz"
+tar --extract --gzip --file k9s.tar.gz k9s
+rm -rf k9s.tar.gz
+
 
 print "Installing APT packages..."
 apt update
@@ -137,6 +152,13 @@ if [ -z "$(ls -A $HOME/programs/webstorm)" ]; then
   rm -rf /tmp/webstorm
 fi
 
+if [ -z "$(ls -A $HOME/programs/intellij)" ]; then
+  print "Installing IntelliJ IDEA..."
+  makedir $HOME/programs/intellij/
+  cp -R /tmp/intellij/* $HOME/programs/intellij/
+  rm -rf /tmp/intellij
+fi
+
 print "Installing Node 18..."
 n 18.16.0
 
@@ -146,32 +168,36 @@ yes | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/in
 chown -R $USER:$USER $HOME/.oh-my-zsh
 chown $USER:$USER $HOME/.zshrc
 
-print "Installing Powerlevel10k theme for Zsh..."
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-cp $REPO/assets/config/.p10k.zsh $HOME/
-chown $USER:$USER $HOME/.p10k.zsh
-
 print "Installing Zsh plugins..."
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/k
 echo "source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> $HOME/.zshrc
 
-print "Installing Linux Brew..."
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+print "Installing Powerlevel10k theme for Zsh..."
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+wget -q --show-progress -O $HOME/.p10k.zsh $REPO/assets/config/.p10k.zsh
+chown $USER:$USER $HOME/.p10k.zsh
+echo "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" >> "$HOME/.zshrc"
+
+print "Installing k9s..."
+mv k9s /usr/bin/
 
 print "Installing asdf..."
-git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.12.0
-echo ". $HOME/.asdf/asdf.sh" >> $HOME/.bashrc
-echo ". $HOME/.asdf/completions/asdf.bash" >> $HOME/.bashrc
+if [ ! -d "$HOME/.asdf" ]; then
+  git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.12.0
+fi
+echo ". $HOME/.asdf/asdf.sh" >> "$HOME/.bashrc"
+echo ". $HOME/.asdf/completions/asdf.bash" >> "$HOME/.bashrc"
+echo ". $HOME/.asdf/asdf.sh" >> "$HOME/.zshrc"
 
 print "Installing Elixir..."
-asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
-asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
-asdf install erlang 24.3.4.12
-asdf install elixir 1.15.0
-asdf global erlang 24.3.4.12
-asdf global elixir 1.15.0
+ASDF="bash $HOME/.asdf/asdf.sh"
+$ASDF plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+$ASDF plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+$ASDF install erlang 24.3.4.12
+$ASDF install elixir 1.15.0
+$ASDF global erlang 24.3.4.12
+$ASDF global elixir 1.15.0
 
 
 print "Registering Git Aliases..."
@@ -219,18 +245,6 @@ echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export ANDROID_HOME=$HOME/android/sdk
 export ANDROID_SDK_ROOT=$HOME/android/sdk
 export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"' | tee $HOME/.bash_profile > $HOME/.zshenv
-
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.bash_profile
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.zshenv
-
-print "Creating desktop entries..."
-for file in assets/desktop-entries/*.desktop
-do
-  envsubst < "$file" > "/usr/share/applications/$(basename $file)"
-done
-
-print "Installing Brew packages..."
-brew install derailed/k9s/k9s
 
 print "Updating font cache..."
 fc-cache -f
