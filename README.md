@@ -76,10 +76,11 @@ git config --global user.name "Your Name"
     - Default Profile
     - Command: `/bin/sh`
     - Font: Inconsolata 18
-- Disable unused WebStorm plugins to improve performance (File > Settings... > Plugins > Installed)
-- Install WebStorm plugins (File > Settings... > Plugins > Marketplace)
+- Disable unused WebStorm and IntelliJ plugins to improve performance (File > Settings... > Plugins > Installed)
+- Install WebStorm and IntelliJ plugins (File > Settings... > Plugins > Marketplace)
   - .env files support
   - .ignore
+  - Atom Material Icons
   - Bash Support
   - CSV Editor
   - Docker
@@ -91,4 +92,7 @@ git config --global user.name "Your Name"
   - Node.js
   - OpenAPI Specifications
   - String Manipulation
+- Change WebStorm and IntelliJ editor font (File > Settings... > Editor > Font)
+  - Font: Lato 16 
+  - Line-Height: 1.2
 - Set zsh as WebStorm terminal (File > Settings... > Tools > Terminal > Application Settings > Shell path)
