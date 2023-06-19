@@ -17,6 +17,11 @@ function makedir {
   chown -R $USER:$USER $1
 }
 
+function makefile {
+  touch $1
+  chown $USER:$USER $1
+}
+
 if [ "$EUID" -ne 0 ]
   then echo "You should run this script as root. Exiting."
   exit
@@ -157,6 +162,7 @@ print "Setting Brave as default browser..."
 update-alternatives --set x-www-browser /usr/bin/brave-browser-stable
 
 print "Registering system aliases..."
+makefile $HOME/.aliases
 wget -O $HOME/.aliases $REPO/.aliases
 
 print "Downloading application launcher icon..."
@@ -170,8 +176,8 @@ print "Setting zsh plugins..."
 sed -i "s|plugins=.*|plugins=(colorize docker git jsontools kubectl k zsh-autosuggestions zsh-syntax-highlighting)|" $HOME/.zshrc
 
 print "Writing environment variables export..."
-touch $HOME/.bash_profile
-touch $HOME/.zshenv
+makefile $HOME/.bash_profile
+makefile $HOME/.zshenv
 echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export ANDROID_HOME=$HOME/android/sdk
 export ANDROID_SDK_ROOT=$HOME/android/sdk
