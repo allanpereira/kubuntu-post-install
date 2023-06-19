@@ -63,7 +63,11 @@ add-apt-repository -y ppa:papirus/papirus > /dev/null 2>&1
 
 
 print "Downloading DisplayLink USB TO DVI Driver..."
-wget -q --show-progress https://www.synaptics.com/sites/default/files/exe_files/2022-08/DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu5.6.1-EXE.zip
+if [ ! -d "/usr/src/evdi-1.12.0" ]; then
+  wget -q --show-progress https://www.synaptics.com/sites/default/files/exe_files/2022-08/DisplayLink%20USB%20Graphics%20Software%20for%20Ubuntu5.6.1-EXE.zip
+else
+  echo -e "Already installed, skipping."
+fi
 
 print "Downloading Source Code Pro Font..."
 FONT_NAME="sourcecodepro"
@@ -106,9 +110,14 @@ npm install -g n yarn pnpm
 
 print "Installing DisplayLink USB TO DVI Driver..."
 apt -qq install -y cpp-12 dctrl-tools dkms gcc-12 libasan8 libdrm-dev libgcc-12-dev libpciaccess-dev libtsan2
-unzip -o 'DisplayLink USB Graphics Software for Ubuntu5.6.1-EXE.zip'
-chmod +x displaylink-driver-5.6.1-59.184.run
-./displaylink-driver-5.6.1-59.184.run
+
+if [ ! -d "/usr/src/evdi-1.12.0" ]; then
+  unzip -o 'DisplayLink USB Graphics Software for Ubuntu5.6.1-EXE.zip'
+  chmod +x displaylink-driver-5.6.1-59.184.run
+  ./displaylink-driver-5.6.1-59.184.run
+else
+  echo -e "Already installed, skipping."
+fi
 
 print "Installing Source Code Pro Font..."
 makedir /usr/share/fonts/truetype/$FONT_NAME
@@ -128,9 +137,13 @@ n 18.16.0
 print "Installing Oh My Zsh..."
 rm -rf $HOME/.oh-my-zsh
 yes | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+chown -R $USER:$USER $HOME/.oh-my-zsh
+chown $USER:$USER $HOME/.zshrc
 
 print "Installing Powerlevel10k theme for Zsh..."
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+cp $REPO/assets/config/.p10k.zsh $HOME/
+chown $USER:$USER $HOME/.p10k.zsh
 
 print "Installing Zsh plugins..."
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

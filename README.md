@@ -71,6 +71,11 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
+- Configure Konsole
+  - Settings > Configure Konsole... > Profiles > New...
+    - Default Profile
+    - Command: `/bin/sh`
+    - Font: Inconsolata 18
 - Disable unused WebStorm plugins to improve performance (File > Settings... > Plugins > Installed)
 - Install WebStorm plugins (File > Settings... > Plugins > Marketplace)
   - .env files support
