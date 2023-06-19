@@ -211,7 +211,7 @@ export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:
 print "Creating desktop entries..."
 for file in assets/desktop-entries/*.desktop
 do
-    envsubst < "$file" > "$HOME/Desktop/$(basename $file)"
+  envsubst < "$file" > "/usr/share/applications/$(basename $file)"
 done
 
 print "Installing Brew packages..."
