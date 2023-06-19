@@ -36,8 +36,9 @@ cd /tmp
 
 
 print "Installing base packages..."
-apt -qq update && apt -qq install -y lsb-release ca-certificates apt-transport-https curl software-properties-common
-
+apt -qq update && apt -qq install -y \
+  apt-transport-https ca-certificates curl software-properties-common \
+  automake autoconf libncurses5-dev lsb-release unixodbc-dev
 
 print "Adding repositories..."
 # Brave
@@ -159,6 +160,20 @@ echo "source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlight
 print "Installing Linux Brew..."
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+print "Installing asdf..."
+git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.12.0
+echo ". $HOME/.asdf/asdf.sh" >> $HOME/.bashrc
+echo ". $HOME/.asdf/completions/asdf.bash" >> $HOME/.bashrc
+
+print "Installing Elixir..."
+asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf install erlang 24.3.4.12
+asdf install elixir 1.15.0
+asdf global erlang 24.3.4.12
+asdf global elixir 1.15.0
+
+
 print "Registering Git Aliases..."
 git config --global alias.co checkout
 git config --global alias.br branch
@@ -195,7 +210,7 @@ print "Setting zsh theme..."
 sed -i "s|ZSH_THEME=.*|ZSH_THEME=\"$ZSH_THEME\"|" $HOME/.zshrc
 
 print "Setting zsh plugins..."
-sed -i "s|plugins=.*|plugins=(colorize docker git jsontools kubectl zsh-autosuggestions zsh-syntax-highlighting)|" $HOME/.zshrc
+sed -i "s|plugins=.*|plugins=(asdf colorize docker git jsontools kubectl zsh-autosuggestions zsh-syntax-highlighting)|" $HOME/.zshrc
 
 print "Writing environment variables export..."
 makefile $HOME/.bash_profile
