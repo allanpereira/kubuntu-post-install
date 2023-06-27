@@ -101,6 +101,16 @@ else
   echo -e "Already installed, skipping."
 fi
 
+print "Downloading RubyMine..."
+if [ -z "$(ls -A $HOME/programs/rubymine)" ]; then
+  wget -q --show-progress "https://download.jetbrains.com/ruby/RubyMine-2023.1.3.tar.gz" -O "rubymine.tar.gz"
+  tar --extract --gzip --file rubymine.tar.gz
+  rm -rf rubymine.tar.gz
+  mv RubyMine* rubymine
+else
+  echo -e "Already installed, skipping."
+fi
+
 print "Downloading k9s..."
 wget -q --show-progress "https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_amd64.tar.gz" -O "k9s.tar.gz"
 tar --extract --gzip --file k9s.tar.gz k9s
@@ -157,6 +167,13 @@ if [ -z "$(ls -A $HOME/programs/intellij)" ]; then
   makedir $HOME/programs/intellij/
   cp -R /tmp/intellij/* $HOME/programs/intellij/
   rm -rf /tmp/intellij
+fi
+
+if [ -z "$(ls -A $HOME/programs/rubymine)" ]; then
+  print "Installing RubyMine..."
+  makedir $HOME/programs/rubymine/
+  cp -R /tmp/rubymine/* $HOME/programs/rubymine/
+  rm -rf /tmp/rubymine
 fi
 
 print "Installing Node 18..."
