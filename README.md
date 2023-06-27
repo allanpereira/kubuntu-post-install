@@ -96,3 +96,10 @@ git config --global user.name "Your Name"
   - Font: Lato 16 
   - Line-Height: 1.2
 - Set zsh as WebStorm terminal (File > Settings... > Tools > Terminal > Application Settings > Shell path)
+- Configure Guake
+  - General > Start Guake at login
+  - Appearance > Palette
+    - Built-in schemes: Elementary / Molokai
+  - Keyboard shortcuts > Clipboard
+    - Copy text to clipboard (Ctrl + C)
+    - Paste text to clipboard (Ctrl + V)
