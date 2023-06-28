@@ -116,6 +116,16 @@ wget -q --show-progress "https://github.com/derailed/k9s/releases/download/v0.27
 tar --extract --gzip --file k9s.tar.gz k9s
 rm -rf k9s.tar.gz
 
+print "Downloading Arduino IDE..."
+if [ -z "$(ls -A $HOME/programs/arduino-ide)" ]; then
+  wget -q --show-progress "https://downloads.arduino.cc/arduino-ide/nightly/arduino-ide_nightly-latest_Linux_64bit.zip" -O "arduino-ide.zip"
+  unzip -o 'arduino-ide.zip'
+  rm -rf arduino-ide.zip
+  mv arduino-ide* arduino-ide
+else
+  echo -e "Already installed, skipping."
+fi
+
 
 print "Installing APT packages..."
 apt update
@@ -174,6 +184,13 @@ if [ -z "$(ls -A $HOME/programs/rubymine)" ]; then
   makedir $HOME/programs/rubymine/
   cp -R /tmp/rubymine/* $HOME/programs/rubymine/
   rm -rf /tmp/rubymine
+fi
+
+if [ -z "$(ls -A $HOME/programs/arduino-ide)" ]; then
+  print "Installing Arduino IDE..."
+  makedir $HOME/programs/arduino-ide/
+  cp -R /tmp/arduino-ide/* $HOME/programs/arduino-ide/
+  rm -rf /tmp/arduino-ide
 fi
 
 print "Installing Node 18..."
