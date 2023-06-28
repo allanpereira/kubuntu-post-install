@@ -129,7 +129,7 @@ apt install -y \
     fonts-inconsolata fonts-roboto \
     papirus-icon-theme \
     brave-browser filezilla \
-    guake gdebi-core gnome-keyring kolourpaint jq qemu-kvm unzip xclip zsh
+    duf guake gdebi-core gnome-keyring kolourpaint jq qemu-kvm unzip xclip zsh
 
 print "Installing Snap packages..."
 snap install discord
