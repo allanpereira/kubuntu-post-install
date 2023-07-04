@@ -31,6 +31,7 @@ wget -O - https://raw.githubusercontent.com/allanpereira/kubuntu-post-install/ma
 - [Google Cloud CLI](https://cloud.google.com/sdk/gcloud) - Set of tools to create and manage Google Cloud resources.
 
 ### CLI Tools
+- [AWS CLI](https://aws.amazon.com/cli/) - Unified tool to manage your AWS services.
 - [jq](https://github.com/jqlang/jq/) - Command-line JSON processor
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k/) - Theme for Zsh which emphasizes speed, flexibility and out-of-the-box experience.
 
