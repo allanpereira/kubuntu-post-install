@@ -126,6 +126,15 @@ else
   echo -e "Already installed, skipping."
 fi
 
+print "Downloading AWS CLI..."
+if [ -z "$(ls -A /usr/local/bin/aws)" ]; then
+  wget -q --show-progress "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "awscliv2.zip"
+  unzip -o 'awscliv2.zip'
+  rm -rf awscliv2.zip
+else
+  echo -e "Already installed, skipping."
+fi
+
 
 print "Installing APT packages..."
 apt update
@@ -191,6 +200,11 @@ if [ -z "$(ls -A $HOME/programs/arduino-ide)" ]; then
   makedir $HOME/programs/arduino-ide/
   cp -R /tmp/arduino-ide/* $HOME/programs/arduino-ide/
   rm -rf /tmp/arduino-ide
+fi
+
+if [ -z "$(ls -A /usr/local/bin/aws)" ]; then
+  print "Installing AWS CLI..."
+  sh -c './aws/install'
 fi
 
 print "Installing Node 18..."
