@@ -37,7 +37,7 @@ cd /tmp
 
 print "Installing base packages..."
 apt -qq update && apt -qq install -y \
-  apt-transport-https ca-certificates curl software-properties-common \
+  apt-transport-https ca-certificates curl software-properties-common gnupg \
   automake autoconf libncurses5-dev lsb-release unixodbc-dev
 
 print "Adding repositories..."
@@ -59,6 +59,14 @@ wget -qO- https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor 
 # Lens
 curl -fsSL https://downloads.k8slens.dev/keys/gpg | gpg --dearmor | tee /usr/share/keyrings/lens-archive-keyring.gpg > /dev/null
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/lens-archive-keyring.gpg] https://downloads.k8slens.dev/apt/debian stable main" | tee /etc/apt/sources.list.d/lens.list > /dev/null
+
+# Docker
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | tee /etc/apt/keyrings/docker.gpg > /dev/null
+chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # PHP
 add-apt-repository -y ppa:ondrej/php > /dev/null 2>&1
@@ -139,6 +147,7 @@ fi
 print "Installing APT packages..."
 apt update
 apt install -y \
+    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     php8.2-cli php8.2-common php8.2-fpm php8.2-mysql php8.2-zip php8.2-gd php8.2-mbstring php8.2-curl php8.2-xml php8.2-bcmath \
     openjdk-17-jdk openjdk-17-jre \
     npm nodejs \
