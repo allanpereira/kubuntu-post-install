@@ -293,7 +293,7 @@ print "Setting zsh theme..."
 sed -i "s|ZSH_THEME=.*|ZSH_THEME=\"$ZSH_THEME\"|" $HOME/.zshrc
 
 print "Setting zsh plugins..."
-sed -i "s|plugins=.*|plugins=(asdf colorize docker git jsontools kubectl zsh-autosuggestions zsh-syntax-highlighting)|" $HOME/.zshrc
+sed -i "s|plugins=.*|plugins=(asdf catimg colorize docker git jsontools kubectl zsh-autosuggestions zsh-syntax-highlighting)|" $HOME/.zshrc
 
 print "Writing environment variables export..."
 makefile $HOME/.bash_profile
