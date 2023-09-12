@@ -74,6 +74,11 @@ add-apt-repository -y ppa:ondrej/php > /dev/null 2>&1
 # Papirus Icon Theme
 add-apt-repository -y ppa:papirus/papirus > /dev/null 2>&1
 
+# Ruby
+add-apt-repository -y ppa:rael-gc/rvm > /dev/null 2>&1
+curl -fsSL https://rvm.io/mpapis.asc | gpg --import - > /dev/null
+curl -fsSL https://rvm.io/pkuczynski.asc | gpg --import - > /dev/null
+
 
 print "Downloading DisplayLink USB TO DVI Driver..."
 if [ ! -d "/usr/src/evdi-1.12.0" ]; then
@@ -151,6 +156,7 @@ apt install -y \
     php8.2-cli php8.2-common php8.2-fpm php8.2-mysql php8.2-zip php8.2-gd php8.2-mbstring php8.2-curl php8.2-xml php8.2-bcmath \
     openjdk-17-jdk openjdk-17-jre \
     npm nodejs \
+    rvm \
     git git-gui gitk git-flow \
     code vim \
     google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin kubectl lens \
@@ -256,6 +262,15 @@ $ASDF install elixir 1.15.0
 $ASDF global erlang 24.3.4.12
 $ASDF global elixir 1.15.0
 
+print "Installing Ruby..."
+sed 's/mozilla.DST_Root_CA_X3.crt/!mozilla\/DST_Root_CA_X3.crt/' -i /etc/ca-certificates.conf
+update-ca-certificates
+echo "source \"/etc/profile.d/rvm.sh\"" >> "$HOME/.zshrc"
+rvm fix-permissions system; rvm fix-permissions user
+rvm get stable
+rvm autolibs enable
+rvm pkg install openssl
+rvm install 2.7.8 -C --with-openssl-dir="$rvm_path/usr"
 
 print "Registering Git Aliases..."
 git config --global alias.co checkout
@@ -294,6 +309,9 @@ sed -i "s|ZSH_THEME=.*|ZSH_THEME=\"$ZSH_THEME\"|" $HOME/.zshrc
 
 print "Setting zsh plugins..."
 sed -i "s|plugins=.*|plugins=(asdf catimg colorize docker git jsontools kubectl zsh-autosuggestions zsh-syntax-highlighting)|" $HOME/.zshrc
+
+print "Adding user to rvm group..."
+usermod -a -G rvm $USER
 
 print "Writing environment variables export..."
 makefile $HOME/.bash_profile
