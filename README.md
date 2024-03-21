@@ -76,13 +76,12 @@ git config --global user.name "Your Name"
   - Settings > Configure Konsole... > Profiles > New...
     - Default Profile
     - Command: `/bin/sh`
-    - Font: Inconsolata 18
+    - Font: Noto Sans Mono 14
 - Disable unused WebStorm and IntelliJ plugins to improve performance (File > Settings... > Plugins > Installed)
 - Install WebStorm and IntelliJ plugins (File > Settings... > Plugins > Marketplace)
   - .env files support
   - .ignore
   - Atom Material Icons
-  - Bash Support
   - CSV Editor
   - Docker
   - GitToolBox
@@ -90,12 +89,14 @@ git config --global user.name "Your Name"
   - Kubernetes
   - Markdown
   - Material Theme UI
+  - Mermaid
   - Node.js
   - OpenAPI Specifications
+  - Rainbow Brackets Lite
   - String Manipulation
 - Change WebStorm and IntelliJ editor font (File > Settings... > Editor > Font)
-  - Font: Lato 16 
-  - Line-Height: 1.2
+  - Font: Noto Sans Mono 14
+  - Line-Height: 1.4
 - Set zsh as WebStorm terminal (File > Settings... > Tools > Terminal > Application Settings > Shell path)
 - Configure Guake
   - General > Start Guake at login
