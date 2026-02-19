@@ -105,3 +105,6 @@ git config --global user.name "Your Name"
   - Keyboard shortcuts > Clipboard
     - Copy text to clipboard (Ctrl + C)
     - Paste text to clipboard (Ctrl + V)
+- Run full distro upgrade (`sudo apt-get dist-upgrade` and `sudo pkcon update`)
+- Check whether the nvidia_drm is enabled (`sudo cat /sys/module/nvidia_drm/parameters/modeset`)
+- Install latest nvidia drivers (`sudo ubuntu-drivers install`)
